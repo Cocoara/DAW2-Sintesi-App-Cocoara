@@ -1,0 +1,69 @@
+
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom"  *ngIf="session.user.token ==''">
+
+
+    <ion-tab-button tab="quiensomos">
+      <ion-label>¿Quien somos?</ion-label>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="inicio">
+      <ion-label>Inicio</ion-label>
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="contact">
+      <ion-label>Contáctanos</ion-label>
+      <ion-icon name="mail-outline"></ion-icon>
+    </ion-tab-button>
+
+  
+  </ion-tab-bar>
+
+  
+  <ion-tab-bar slot="bottom"  *ngIf="session.user.group ==2">
+
+
+    <ion-tab-button tab="incidencias">
+      <ion-label>Incidencias</ion-label>
+      <ion-icon name="hammer-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="inicio">
+      <ion-label>Inicio</ion-label>
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="opciones">
+      <ion-label>Opciones</ion-label>
+      <ion-icon name="settings-outline"></ion-icon>
+    </ion-tab-button>
+
+  
+  </ion-tab-bar>
+
+  
+  <ion-tab-bar slot="bottom"  *ngIf="session.user.group ==3">
+
+
+    <ion-tab-button tab="quiensomos">
+      <ion-label>Incidencias</ion-label>
+      <ion-icon name="hammer-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="inicio">
+      <ion-label>Inicio</ion-label>
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="opciones">
+      <ion-label>Opciones</ion-label>
+      <ion-icon name="settings-outline"></ion-icon>
+    </ion-tab-button>
+
+  
+  </ion-tab-bar>
+
+</ion-tabs>

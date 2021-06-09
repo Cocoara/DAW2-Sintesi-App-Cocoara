@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-card *ngFor="let group of userGroup; let i=index">Hola</ion-card> -->
+
+  <div *ngIf="session.user.token == ''">
+    <ion-card *ngFor="let info of homeinfo; let i=index">
+      <ion-img [src]="'http://localhost/BitBit/public_imagen/homeimages/' + info.image"></ion-img>
+      <ion-card-header>
+        <ion-card-subtitle></ion-card-subtitle>
+        <ion-card-title>{{info.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <small [innerHTML]="info.content"></small>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="session.user.token != ''">
+    <ion-card *ngFor="let noticia of noticias; let i=index">
+      <ion-img [src]=""></ion-img>
+      <ion-card-header>
+        <ion-card-subtitle></ion-card-subtitle>
+        <ion-card-title [innerHTML]="noticia.contenido"></ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <small [innerHTML]="noticia.contenido"></small>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/login" color="primary" *ngIf="session.user.token ==''">
+      <ion-icon name="log-in-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button routerLink="/logout" color="danger" *ngIf="session.user.token != ''">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="session.user.group == 2">
+    <ion-fab-button routerLink="/tabs/messages" color="primary">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="session.user.group == 3">
+    <ion-fab-button routerLink="/messages" color="primary">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

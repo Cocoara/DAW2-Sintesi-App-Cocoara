@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>inbox</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Mensajes recientes
+    </ion-list-header>
+
+    <ion-item *ngFor="let message of messages;let i=index">
+      <ion-avatar slot="start">
+        <img src="http://localhost/BitBit/assets/img/user.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{message.from}}</h2>
+        <h3>{{message.asunto}}</h3>
+        <p>{{message.mensaje}}</p>
+      </ion-label>
+    </ion-item>
+    
+  </ion-list>
+</ion-content>
