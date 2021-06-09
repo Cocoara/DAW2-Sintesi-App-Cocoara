@@ -18,21 +18,32 @@ export class MessagesPage implements OnInit {
   public correo: string = "";
   public mensaje: string = "";
   public data: string = "";
-  
+
   user_id = this.session.user.id;
 
   public ToMessages: Tomessages[] = [];
   public messages: Messages[] = [];
 
 
-  constructor(private messagesService: MessagesService, public session: SessionService, private router: Router) { 
-      
-    this.messagesService.retrieveToMessgaesAdminFromHttp();
-    this.messagesService.ToMessages.subscribe(
-      (otomessages: Tomessages[]) => {
-        this.ToMessages = otomessages;
-      }
-    );
+  constructor(private messagesService: MessagesService, public session: SessionService, private router: Router) {
+
+
+    if (this.session.user.group == 2) {
+      this.messagesService.retrieveToMessgaesAdminFromHttp();
+      this.messagesService.ToMessages.subscribe(
+        (otomessages: Tomessages[]) => {
+          this.ToMessages = otomessages;
+        }
+      );
+    }
+    if (this.session.user.group != 2) {
+      this.messagesService.retrieveToMessgaesFromHttp();
+      this.messagesService.ToMessages.subscribe(
+        (otomessages: Tomessages[]) => {
+          this.ToMessages = otomessages;
+        }
+      );
+    }
   }
 
   ngOnInit() {

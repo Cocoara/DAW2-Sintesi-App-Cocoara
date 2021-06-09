@@ -22,7 +22,6 @@ export class IncidenciasPage implements OnInit {
         this.incidencias = oincidencias;
       }
     );
-
   }
 
   ngOnInit() {

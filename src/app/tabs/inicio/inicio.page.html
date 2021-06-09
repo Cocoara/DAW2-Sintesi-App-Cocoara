@@ -46,14 +46,8 @@
   </ion-fab>
 
 
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="session.user.group == 2">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button routerLink="/tabs/messages" color="primary">
-      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="session.user.group == 3">
-    <ion-fab-button routerLink="/messages" color="primary">
       <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

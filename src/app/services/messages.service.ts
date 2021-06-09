@@ -106,6 +106,49 @@ export class MessagesService {
       }
     );
   }
+
+
+
+
+
+  
+  retrieveToMessgaesFromHttp() {
+    let size = 0;
+    this.ToMessages.pipe(take(1)).subscribe(
+      (otomessages: Tomessages[]) => {
+        size = otomessages.length;
+      }
+    );
+
+
+    let options = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.sessionService.user.token
+      }),
+      observe: 'response' as 'response'
+    };
+
+    this.http.get("http://localhost/BitBit/private/tomessagesAll", options).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.sessionService.updateToken(response.body.token);
+        if (response.body.tomessages.length == size) return;
+        else this._tomessages.next([]);
+        response.body.tomessages.forEach((element) => {
+          let ToMessages: Tomessages = new Tomessages();
+          ToMessages.id = element.id;
+          ToMessages.username = element.username;
+
+          this.ToMessages.pipe(take(1)).subscribe(
+            (otomessages: Tomessages[]) => {
+              this._tomessages.next(otomessages.concat(ToMessages));
+            }
+          )
+        });
+      }
+    );
+  }
  
 
   sendMessage(messages: Messages){

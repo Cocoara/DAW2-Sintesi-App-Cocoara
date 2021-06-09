@@ -10,10 +10,67 @@
     <ion-img [src]="incidencia.canvasImage"></ion-img>
     <ion-card-header>
       <ion-card-subtitle></ion-card-subtitle>
-      <ion-card-title>{{incidencia.desc_averia}}</ion-card-title>
+      <ion-card-title>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8" offset="1">
+
+              {{incidencia.desc_averia}}
+
+            </ion-col>
+            <ion-col size="2" offset="1">
+
+              <ion-img *ngIf="incidencia.id_Estado==1" style="width: 38px;"
+                src='http://localhost/BitBit/assets/img/delete.png'></ion-img>
+              <ion-img *ngIf="incidencia.id_Estado==2" style="width: 38px;"
+                src='http://localhost/BitBit/assets/img/Working.png'></ion-img>
+              <ion-img *ngIf="incidencia.id_Estado==3" style="width: 38px;"
+                src='http://localhost/BitBit/assets/img/Completado.png'></ion-img>
+              <ion-img *ngIf="incidencia.id_Estado==4" style="width: 38px;"
+                src='http://localhost/BitBit/assets/img/Enviado.png'></ion-img>
+
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <small [innerHTML]="incidencia.desc_averia"></small>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8" offset="1">
+            <small [innerHTML]="incidencia.Marca"></small>
+          </ion-col>
+          <ion-col size="2" offset="1">
+            <small [innerHTML]="incidencia.Modelo"></small>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Descripción: <small [innerHTML]="incidencia.Diagnostico_prev"></small>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            UUID: <small [innerHTML]="incidencia.uuid"></small>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Material: <small [innerHTML]="incidencia.material"></small>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+      <ion-row>
+        <ion-col size="7" offset="1"></ion-col>
+        <ion-col size="3" offset="1">
+          <small [innerHTML]="incidencia.Fecha_entrada"></small>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 
