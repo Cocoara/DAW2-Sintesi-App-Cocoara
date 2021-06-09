@@ -27,51 +27,84 @@ export class IncidenciasService {
       }
     );
 
-// console.log(this.sessionService.user.token);
-
     let options = {
-      headers: new HttpHeaders({ 
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.sessionService.user.token
       }),
       observe: 'response' as 'response'
     };
 
-// console.log(this.sessionService.user.token);
+    
+    if (this.sessionService.user.group == 3) {
+      this.http.get("http://localhost/BitBit/private/incidenciasTecnico/" + user_id, options).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.sessionService.updateToken(response.body.token);
+          if (response.body.incidencias.length == size) return;
+          else this._incidencias.next([]);
+          response.body.incidencias.forEach((element) => {
+            let incidencias: Incidencias = new Incidencias();
+            incidencias.id_incidencia = element.id_incidencia;
+            incidencias.id_user = element.id_user;
+            incidencias.id_Estado = element.id_Estado;
+            incidencias.desc_averia = element.desc_averia;
+            incidencias.Fecha_entrada = element.Fecha_entrada;
+            incidencias.uuid = element.uuid;
+            incidencias.Marca = element.Marca;
+            incidencias.Modelo = element.Modelo;
+            incidencias.Numerio_serio = element.Numerio_serio;
+            incidencias.Diagnostico_prev = element.Diagnostico_prev;
+            incidencias.tiempo_reparacion = element.tiempo_reparacion;
+            incidencias.id_tecnico = element.id_tecnico;
+            incidencias.descripcion_gestor = element.descripcion_gestor;
+            incidencias.canvasImage = element.canvasImage;
+            incidencias.rutaFicheros = element.rutaFicheros;
+            incidencias.material = element.material;
 
-    this.http.get("http://localhost/BitBit/private/incidencias/"+user_id, options).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.sessionService.updateToken(response.body.token);
-        if (response.body.incidencias.length == size) return;
-        else this._incidencias.next([]);
-        response.body.incidencias.forEach((element) => {
-          let incidencias: Incidencias = new Incidencias();
-          incidencias.id_incidencia = element.id_incidencia;
-          incidencias.id_user = element.id_user;
-          incidencias.id_Estado = element.id_Estado;
-          incidencias.desc_averia = element.desc_averia;
-          incidencias.Fecha_entrada = element.Fecha_entrada;
-          incidencias.uuid = element.uuid;
-          incidencias.Marca = element.Marca;
-          incidencias.Modelo = element.Modelo;
-          incidencias.Numerio_serio = element.Numerio_serio;
-          incidencias.Diagnostico_prev = element.Diagnostico_prev;
-          incidencias.tiempo_reparacion = element.tiempo_reparacion;
-          incidencias.id_tecnico = element.id_tecnico;
-          incidencias.descripcion_gestor = element.descripcion_gestor;
-          incidencias.canvasImage = element.canvasImage;
-          incidencias.rutaFicheros = element.rutaFicheros;
-          incidencias.material = element.material;
+            this.incidencias.pipe(take(1)).subscribe(
+              (oincidencias: Incidencias[]) => {
+                this._incidencias.next(oincidencias.concat(incidencias));
+              }
+            )
+          });
+        }
+      );
+    }
+    else {
+      this.http.get("http://localhost/BitBit/private/incidencias/" + user_id, options).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.sessionService.updateToken(response.body.token);
+          if (response.body.incidencias.length == size) return;
+          else this._incidencias.next([]);
+          response.body.incidencias.forEach((element) => {
+            let incidencias: Incidencias = new Incidencias();
+            incidencias.id_incidencia = element.id_incidencia;
+            incidencias.id_user = element.id_user;
+            incidencias.id_Estado = element.id_Estado;
+            incidencias.desc_averia = element.desc_averia;
+            incidencias.Fecha_entrada = element.Fecha_entrada;
+            incidencias.uuid = element.uuid;
+            incidencias.Marca = element.Marca;
+            incidencias.Modelo = element.Modelo;
+            incidencias.Numerio_serio = element.Numerio_serio;
+            incidencias.Diagnostico_prev = element.Diagnostico_prev;
+            incidencias.tiempo_reparacion = element.tiempo_reparacion;
+            incidencias.id_tecnico = element.id_tecnico;
+            incidencias.descripcion_gestor = element.descripcion_gestor;
+            incidencias.canvasImage = element.canvasImage;
+            incidencias.rutaFicheros = element.rutaFicheros;
+            incidencias.material = element.material;
 
-          this.incidencias.pipe(take(1)).subscribe(
-            (oincidencias: Incidencias[]) => {
-              this._incidencias.next(oincidencias.concat(incidencias));
-            }
-          )
-        });
-      }
-    );
-
+            this.incidencias.pipe(take(1)).subscribe(
+              (oincidencias: Incidencias[]) => {
+                this._incidencias.next(oincidencias.concat(incidencias));
+              }
+            )
+          });
+        }
+      );
+    }
   }
 }

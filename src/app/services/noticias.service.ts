@@ -42,9 +42,9 @@ export class NoticiasService {
         (response: any) => {
           this.sessionService.updateToken(response.body.token);
           console.log(response);
-          if (response.body.noticies.length == size) return;
+          if (response.body.noticias.length == size) return;
           else this._noticias.next([]);
-          response.body.noticies.forEach((element) => {
+          response.body.noticias.forEach((element) => {
             let noticias: Noticias = new Noticias();
             noticias.id = element.id;
             noticias.titulo = element.titulo;

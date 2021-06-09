@@ -25,7 +25,7 @@
       <ion-img [src]=""></ion-img>
       <ion-card-header>
         <ion-card-subtitle></ion-card-subtitle>
-        <ion-card-title [innerHTML]="noticia.contenido"></ion-card-title>
+        <ion-card-title style="font-size: 14px;" [innerHTML]="noticia.contenido"></ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <small [innerHTML]="noticia.contenido"></small>
@@ -46,7 +46,7 @@
   </ion-fab>
 
 
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="session.user.token != ''">
     <ion-fab-button routerLink="/tabs/messages" color="primary">
       <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
     </ion-fab-button>

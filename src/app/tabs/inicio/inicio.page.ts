@@ -6,8 +6,6 @@ import { HomeInfoService } from 'src/app/services/homeInfo.service';
 import { NoticiasService } from 'src/app/services/noticias.service';
 import { SessionService } from 'src/app/services/session.service';
 
-// import { PopoverController } from '@ionic/angular';
-// import { PopoverComponent } from '../../../../component/popover/popover.component';
 
 @Component({
   selector: 'app-inicio',

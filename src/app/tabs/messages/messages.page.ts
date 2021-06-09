@@ -36,7 +36,7 @@ export class MessagesPage implements OnInit {
         }
       );
     }
-    if (this.session.user.group != 2) {
+    if (this.session.user.group == 3 || this.session.user.group == 4 || this.session.user.group == 1 ) {
       this.messagesService.retrieveToMessgaesFromHttp();
       this.messagesService.ToMessages.subscribe(
         (otomessages: Tomessages[]) => {

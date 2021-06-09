@@ -16,12 +16,25 @@ export class IncidenciasPage implements OnInit {
   public incidencias: Incidencias[] = [];
   user_id = this.session.user.id;
   constructor(private incidenciasService: IncidenciasService, private session: SessionService) {
-    this.incidenciasService.retrieveIncidenciasFromHttp(this.user_id);
-    this.incidenciasService.incidencias.subscribe(
-      (oincidencias: Incidencias[]) => {
-        this.incidencias = oincidencias;
-      }
-    );
+    
+    if(this.session.user.group == 2){
+      this.incidenciasService.retrieveIncidenciasFromHttp(this.user_id);
+      this.incidenciasService.incidencias.subscribe(
+        (oincidencias: Incidencias[]) => {
+          this.incidencias = oincidencias;
+        }
+      );
+    }
+
+    if(this.session.user.group == 3){
+      this.incidenciasService.retrieveIncidenciasFromHttp(this.user_id);
+      this.incidenciasService.incidencias.subscribe(
+        (oincidencias: Incidencias[]) => {
+          this.incidencias = oincidencias;
+        }
+      );
+    }
+
   }
 
   ngOnInit() {
