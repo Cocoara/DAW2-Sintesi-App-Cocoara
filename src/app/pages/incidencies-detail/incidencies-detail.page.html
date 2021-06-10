@@ -1,5 +1,8 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Atrás"></ion-back-button>
+    </ion-buttons>
     <ion-title>incidencies-detail</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,58 +10,35 @@
 <ion-content>
 
   <ion-grid>
+
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-           <ion-input [(ngModel)]="username"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Apellido</ion-label>
-          <ion-input [(ngModel)]="lastname"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Teléfono</ion-label>
-          <ion-input [(ngModel)]="phone"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input [(ngModel)]="email" ></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input [(ngModel)]="password"></ion-input>
+          <ion-label position="floating">Estado</ion-label>
+          <ion-select [(ngModel)]="estados">
+            <ion-select-option *ngFor="let estado of estados;let i=index" value="{{estado.id_Estado}}">{{estado.Descrip}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
 
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Estado</ion-label>
+           <ion-input [(ngModel)]="id_Estado"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+   
   
   <ion-row>
     <ion-col>
       <ion-item>
-        <ion-button routerLink="/tabs/inicio" (click)="updateOptions()">Actualizar datos</ion-button>
+        <!-- <ion-button routerLink="/tabs/inicio" (click)="updateIncidencia()">Actualizar datos</ion-button> -->
       </ion-item>
     </ion-col>
   </ion-row>
   </ion-grid>
-</ion-content> -->
+</ion-content>

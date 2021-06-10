@@ -91,11 +91,11 @@
         </ion-fab-button>
       </ion-fab>
 
-      <!-- <ion-fab *ngIf="this.session.user.group==2" vertical="bottom" horizontal="start" slot="fixed">
-        <ion-fab-button href="http://localhost/BitBit/fichaUUID/"+incidencia.uuid color="warning">
-          <ion-icon name="create-outline"></ion-icon>
+      <ion-fab *ngIf="this.session.user.group==2" vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button target="_blank" href="http://localhost/BitBit/private/fichaUUIDApp/{{incidencia.uuid}}" color="danger">
+          <ion-icon name="cloud-download-outline"></ion-icon>
         </ion-fab-button>
-      </ion-fab> -->
+      </ion-fab>
 
     </ion-card-content>
   </ion-card>

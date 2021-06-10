@@ -42,7 +42,7 @@ export class OpcionesService {
           opciones.email = element.email;
           opciones.phone = element.phone;
           
-          console.log(opciones);
+          console.log(response);
           
           this.opciones.pipe(take(1)).subscribe(
             (oopciones: Opciones) => {
