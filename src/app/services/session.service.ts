@@ -21,7 +21,7 @@ export class SessionService {
       'token': user.token,
       'group': user.group,
     }
-    console.log(userData);
+  
     localStorage.setItem("USER_SESSION", JSON.stringify(userData));
   }
 

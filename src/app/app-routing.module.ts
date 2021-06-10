@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'logout',
     loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
   },
+  {
+    path: 'incidencies-detail',
+    loadChildren: () => import('./pages/incidencies-detail/incidencies-detail.module').then( m => m.IncidenciesDetailPageModule)
+  },
 ];
 
 

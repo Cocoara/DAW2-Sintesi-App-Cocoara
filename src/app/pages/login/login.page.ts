@@ -30,7 +30,6 @@ export class LoginPage implements OnInit {
         user.group = response.body.userGroup[0].group_id;
         this.session.user = user; 
         
-        console.log(user);
         this.loginError= false;
         this.redirectTo('/tabs/inicio');
       },

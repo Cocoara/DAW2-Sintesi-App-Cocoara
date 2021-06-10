@@ -15,7 +15,7 @@ export class IncidenciasPage implements OnInit {
 
   public incidencias: Incidencias[] = [];
   user_id = this.session.user.id;
-  constructor(private incidenciasService: IncidenciasService, private session: SessionService) {
+  constructor(private incidenciasService: IncidenciasService, public session: SessionService) {
     
     if(this.session.user.group == 2){
       this.incidenciasService.retrieveIncidenciasFromHttp(this.user_id);

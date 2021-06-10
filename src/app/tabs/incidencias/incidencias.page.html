@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>incidencias</ion-title>
+    <ion-title>Incidencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -34,21 +34,33 @@
         </ion-grid>
 
       </ion-card-title>
+     <ion-grid>
+      <ion-row>
+        <ion-col size="7" offset="1">
+        </ion-col>
+        <ion-col size="3" offset="1">
+          <small *ngIf="incidencia.id_Estado==1">No asignado</small>
+          <small *ngIf="incidencia.id_Estado==2">En curso</small>
+          <small *ngIf="incidencia.id_Estado==3">Completado</small>
+          <small *ngIf="incidencia.id_Estado==4">Entregado</small>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col size="8" offset="1">
-            <small [innerHTML]="incidencia.Marca"></small>
+          <ion-col size="5" offset="1">
+            Marca: <small [innerHTML]="incidencia.Marca"></small>
           </ion-col>
-          <ion-col size="2" offset="1">
-            <small [innerHTML]="incidencia.Modelo"></small>
+          <ion-col size="5" offset="1">
+            Modelo: <small [innerHTML]="incidencia.Modelo"></small>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            Descripción: <small [innerHTML]="incidencia.Diagnostico_prev"></small>
+            Descripción: <br><small [innerHTML]="incidencia.Diagnostico_prev"></small>
           </ion-col>
         </ion-row>
 
@@ -71,6 +83,20 @@
           <small [innerHTML]="incidencia.Fecha_entrada"></small>
         </ion-col>
       </ion-row>
+
+      <br>
+      <ion-fab *ngIf="this.session.user.group==3" vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button [routerLink]="['/incidencies-detail',incidencia.id_incidencia]" color="warning">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <!-- <ion-fab *ngIf="this.session.user.group==2" vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button href="http://localhost/BitBit/fichaUUID/"+incidencia.uuid color="warning">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
+
     </ion-card-content>
   </ion-card>
 
