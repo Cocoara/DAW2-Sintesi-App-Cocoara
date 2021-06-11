@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button text="Atrás"></ion-back-button>
     </ion-buttons>
-    <ion-title>incidencies-detail</ion-title>
+    <ion-title>Incidenia {{id_incidencia}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,12 +13,9 @@
 
     <ion-row>
       <ion-col>
-        <ion-item>
-          <ion-label position="floating">Estado</ion-label>
-          <ion-select [(ngModel)]="estados">
-            <ion-select-option *ngFor="let estado of estados;let i=index" value="{{estado.id_Estado}}">{{estado.Descrip}}</ion-select-option>
-          </ion-select>
-        </ion-item>
+        <ion-card>
+          <ion-img [src]="canvasImage"></ion-img>
+        </ion-card>
       </ion-col>
     </ion-row>
 
@@ -26,17 +23,112 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">Estado</ion-label>
-           <ion-input [(ngModel)]="id_Estado"></ion-input>
+          <ion-select [(ngModel)]="id_Estado">
+            <ion-select-option *ngFor="let estado of estados;" value="{{estado.id_Estado}}">{{estado.Descrip}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
+
+  
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Fecha entrada</ion-label>
+           <ion-input disabled [(ngModel)]="Fecha_entrada"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Descripción de la avería</ion-label>
+           <ion-textarea [(ngModel)]="desc_averia"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">UUID</ion-label>
+           <ion-input disabled [(ngModel)]="uuid"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Marca</ion-label>
+           <ion-input [(ngModel)]="Marca"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Modelo</ion-label>
+           <ion-input  [(ngModel)]="Modelo"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Número de serie</ion-label>
+           <ion-input  [(ngModel)]="Numerio_serio"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Diagnóstico previo</ion-label>
+           <ion-textarea [(ngModel)]="Diagnostico_prev"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Tiempo reparación</ion-label>
+           <ion-input  [(ngModel)]="tiempo_reparacion"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Diágnostico gestor</ion-label>
+           <ion-input  [(ngModel)]="descripcion_gestor"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Material usado</ion-label>
+           <ion-textarea  [(ngModel)]="material"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
   
    
   
   <ion-row>
     <ion-col>
       <ion-item>
-        <!-- <ion-button routerLink="/tabs/inicio" (click)="updateIncidencia()">Actualizar datos</ion-button> -->
+        <ion-button routerLink="/tabs/inicio" (click)="updateIncidencia()">Actualizar incidencia</ion-button>
       </ion-item>
     </ion-col>
   </ion-row>

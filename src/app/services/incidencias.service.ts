@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Estado } from '../models/estado';
@@ -15,7 +16,7 @@ export class IncidenciasService {
   private _estados: BehaviorSubject<Estado[]> = new BehaviorSubject([]);
   private _incidencia: BehaviorSubject<Incidencias> = new BehaviorSubject(new Incidencias);
 
-  constructor(private http: HttpClient, private sessionService: SessionService) { }
+  constructor(private http: HttpClient, private sessionService: SessionService, private router: Router) { }
   get estados(): Observable<Estado[]> {
     return this._estados.asObservable();
   }
@@ -174,7 +175,8 @@ export class IncidenciasService {
     );
 
     this.http.get("http://localhost/BitBit/private/estadosIncidencia").subscribe(
-      (response: any[]) => {
+      (response: any) => {
+        console.log(response)
         if (response.length == size) return;
         else this._estados.next([]);
         response.forEach((element) => {
@@ -193,8 +195,20 @@ export class IncidenciasService {
   }
 
   updateIncidencia(incidencia: Incidencias) {
-    let consultaData = {
-      id: incidencia.id_incidencia,
+    let updateData = {
+      id_incidencia: incidencia.id_incidencia,
+      id_Estado: incidencia.id_Estado,
+      Fecha_entrada: incidencia.Fecha_entrada,
+      desc_averia: incidencia.desc_averia,
+      uuid: incidencia.uuid,
+      Marca: incidencia.Marca,
+      Modelo: incidencia.Modelo,
+      Numerio_serio: incidencia.Numerio_serio,
+      Diagnostico_prev: incidencia.Diagnostico_prev,
+      tiempo_reparacion: incidencia.tiempo_reparacion,
+      descripcion_gestor: incidencia.descripcion_gestor,
+      material: incidencia.material,
+      canvasImage: incidencia.canvasImage
     };
 
     let options = {
@@ -203,10 +217,11 @@ export class IncidenciasService {
         'Authorization': 'Bearer ' + this.sessionService.user.token
       })
     };
-    this.http.post("http://localhost/BitBit/private/updateOpciones", consultaData, options).subscribe(
+    
+    this.http.post("http://localhost/BitBit/private/updateIncidencia/"+incidencia.id_incidencia, updateData, options).subscribe(
       (response: any) => {
+        console.log(response)
         this.sessionService.updateToken(response.token);
-        console.log("Consulta enviada correctamente");
       },
       (error: any) => {
         alert("Error: " + error.message);

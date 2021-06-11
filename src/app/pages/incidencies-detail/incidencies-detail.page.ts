@@ -32,6 +32,7 @@ export class IncidenciesDetailPage implements OnInit {
   public material: string;
 
   public estados: Estado[] = [];
+  public selectedid_Estado: number;
 
   constructor(private activatedRoute: ActivatedRoute, private incidenciasService: IncidenciasService, private session: SessionService, private router: Router) {
     this.activatedRoute.params.subscribe(
@@ -57,16 +58,20 @@ export class IncidenciesDetailPage implements OnInit {
               this.canvasImage = oincidencia.canvasImage;
               this.rutaFicheros = oincidencia.rutaFicheros;
               this.material = oincidencia.material;
+
+              this.selectedid_Estado = oincidencia.id_Estado;
+
             }
           );
 
 
           this.incidenciasService.retrieveEstadosFromHttp();
           this.incidenciasService.estados.subscribe(
-              (oestados: Estado[]) => {
-                this.estados = oestados;
-              }
+            (oestados: Estado[]) => {
+              this.estados = oestados;
+            }
           );
+          this.id_incidencia = params['id_incidencia'];
         }
       }
     );
@@ -75,50 +80,31 @@ export class IncidenciesDetailPage implements OnInit {
   ngOnInit() {
   }
 
-  // updateOptions() {
-  //   if (this.session.user.token == '') {
-  //     this.router.navigate(['/inicio'])
-  //   }
+  updateIncidencia() {
+    if (this.session.user.token == '') {
+      this.router.navigate(['/inicio'])
+    }
 
-  //   let opciones: Opciones = new Opciones();
-  //   if (this.password != '') {
-  //     opciones.id = this.session.user.id;
-  //     opciones.username = this.username;
-  //     opciones.lastname = this.lastname;
-  //     opciones.email = this.email;
-  //     opciones.phone = this.phone;
-  //     opciones.password = this.password;
+    let incidencia: Incidencias = new Incidencias();
 
-  //     this.opcionesService.updateOptions(opciones);
-  //   }
+    incidencia.id_incidencia = this.id_incidencia;
+    incidencia.id_Estado = this.id_Estado;
+    incidencia.Fecha_entrada = this.Fecha_entrada;
+    incidencia.desc_averia = this.desc_averia;
+    incidencia.uuid = this.uuid;
+    incidencia.Marca = this.Marca;
+    incidencia.Modelo = this.Modelo;
+    incidencia.Numerio_serio = this.Numerio_serio;
+    incidencia.Diagnostico_prev = this.Diagnostico_prev;
+    incidencia.tiempo_reparacion = this.tiempo_reparacion;
+    incidencia.descripcion_gestor = this.descripcion_gestor;
+    incidencia.material = this.material;
+    incidencia.canvasImage = this.canvasImage;
 
-  // public incidencia: Incidencias[] = [];
-  // private id_incidencia: string = "";
+    console.log(incidencia.id_Estado)
 
-  // constructor(private activatedRoute: ActivatedRoute, private incidenciasService: IncidenciasService, public session: SessionService) {
-
-  //   this.activatedRoute.params.subscribe(
-  //     (params: Params) => {
-  //       if (params['id_incidencia']) {
-  //         if(this.session.user.group == 3){
-  //           this.incidenciasService.retrieveIncidenciaFromHttp(this.id_incidencia);
-  //           this.incidenciasService.incidencias.subscribe(
-  //             (oincidencias: Incidencias[]) => {
-  //               this.incidencia = oincidencias;
-  //             }
-  //           );
-  //         }
-  //       }
-  //       else {
-  //         console.log('no')
-  //       }
-  //     }
-  //   );
-  // }
+    this.incidenciasService.updateIncidencia(incidencia);
+  }
 
 
-
-  // }  
 }
-
-
