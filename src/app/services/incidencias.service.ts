@@ -50,7 +50,6 @@ export class IncidenciasService {
     if (this.sessionService.user.group == 3) {
       this.http.get("http://localhost/BitBit/private/incidenciasTecnico/" + user_id, options).subscribe(
         (response: any) => {
-          console.log(response);
           this.sessionService.updateToken(response.body.token);
           if (response.body.incidencias.length == size) return;
           else this._incidencias.next([]);
@@ -85,7 +84,6 @@ export class IncidenciasService {
     else {
       this.http.get("http://localhost/BitBit/private/incidencias/" + user_id, options).subscribe(
         (response: any) => {
-          console.log(response);
           this.sessionService.updateToken(response.body.token);
           if (response.body.incidencias.length == size) return;
           else this._incidencias.next([]);
@@ -132,10 +130,8 @@ export class IncidenciasService {
 
     this.http.get("http://localhost/BitBit/private/incidenciaById/" + id_incidencia, options).subscribe(
       (response: any) => {
-        
         this.sessionService.updateToken(response.body.token);
         if (response.body.incidencia == false) return;
-        
         response.body.incidencia.forEach((element) => {
           let incidencia: Incidencias = new Incidencias();
             incidencia.id_incidencia = element.id_incidencia;
@@ -176,7 +172,6 @@ export class IncidenciasService {
 
     this.http.get("http://localhost/BitBit/private/estadosIncidencia").subscribe(
       (response: any) => {
-        console.log(response)
         if (response.length == size) return;
         else this._estados.next([]);
         response.forEach((element) => {
@@ -193,6 +188,7 @@ export class IncidenciasService {
       }
     );
   }
+
 
   updateIncidencia(incidencia: Incidencias) {
     let updateData = {
@@ -215,13 +211,13 @@ export class IncidenciasService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.sessionService.user.token
-      })
+      }),
+      observe: 'response' as 'response'
     };
     
     this.http.post("http://localhost/BitBit/private/updateIncidencia/"+incidencia.id_incidencia, updateData, options).subscribe(
       (response: any) => {
-        console.log(response)
-        this.sessionService.updateToken(response.token);
+        this.sessionService.updateToken(response.body.token);
       },
       (error: any) => {
         alert("Error: " + error.message);

@@ -45,7 +45,6 @@ export class MessagesService {
 
     this.http.get("http://localhost/BitBit/private/getmessages/"+user_id, options).subscribe(
       (response: any) => {
-        console.log(response);
         this.sessionService.updateToken(response.body.token);
         if (response.body.mymessages.length == size) return;
         else this._messages.next([]);
@@ -88,7 +87,6 @@ export class MessagesService {
 
     this.http.get("http://localhost/BitBit/private/tomessages", options).subscribe(
       (response: any) => {
-        console.log(response);
         this.sessionService.updateToken(response.body.token);
         if (response.body.tomessages.length == size) return;
         else this._tomessages.next([]);

@@ -38,9 +38,6 @@ export class InicioPage implements OnInit {
         this.homeinfo = oHomeinfo;
       });
       
-
-
-  
   }
 
   ngOnInit() {

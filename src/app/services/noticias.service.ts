@@ -41,7 +41,7 @@ export class NoticiasService {
       this.http.get("http://localhost/BitBit/private/noticiasByGroup/" + group_id, options).subscribe(
         (response: any) => {
           this.sessionService.updateToken(response.body.token);
-          console.log(response);
+          console.log("Nuevo token: "+response.body.token);
           if (response.body.noticias.length == size) return;
           else this._noticias.next([]);
           response.body.noticias.forEach((element) => {

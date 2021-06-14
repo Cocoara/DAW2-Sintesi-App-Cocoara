@@ -101,8 +101,7 @@ export class IncidenciesDetailPage implements OnInit {
     incidencia.material = this.material;
     incidencia.canvasImage = this.canvasImage;
 
-    console.log(incidencia.id_Estado)
-
+    console.log("Este es el token de la incidencia: "+this.session.user.token)
     this.incidenciasService.updateIncidencia(incidencia);
   }
 

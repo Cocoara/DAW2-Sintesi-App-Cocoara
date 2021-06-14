@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Consulta } from 'src/app/models/consulta';
 import { Opciones } from 'src/app/models/opciones';
 import { OpcionesService } from 'src/app/services/opciones.service';
@@ -20,18 +20,21 @@ export class OpcionesPage implements OnInit {
 
   user_id = this.session.user.id;
 
-  constructor(private opcionesService: OpcionesService, private session: SessionService, private router: Router) {
-    this.opcionesService.retrieveOpcionesFromHttp(this.user_id);
+  constructor(private opcionesService: OpcionesService, private session: SessionService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.opcionesService.retrieveOpcionesFromHttp(this.user_id);
 
-    this.opcionesService.opciones.subscribe(
-      (oopciones: Opciones) => {
-        this.username = oopciones.username;
-        this.lastname = oopciones.lastname;
-        this.email = oopciones.email;
-        this.phone = oopciones.phone;
+        this.opcionesService.opciones.subscribe(
+          (oopciones: Opciones) => {
+            this.username = oopciones.username;
+            this.lastname = oopciones.lastname;
+            this.email = oopciones.email;
+            this.phone = oopciones.phone;
 
-      }
-    );
+          }
+        );
+      });
   }
 
   ngOnInit() {
